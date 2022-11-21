@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GD对接教程</title>
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <ol>
+        <li>私聊管理员获得一个Google drive 团队账号，也可自己购买全局管理</li>
+        <li style="color: red">浏览器打开一个无痕浏览（保证当前会话没有登录过其他Google账号！）</li>
+
+        <li>
+            前往<a href="https://drive.google.com/drive/shared-drives" target="_blank">Google drive</a>，创建一个根目录（用于存放上传的文件）。
+            如下图，创建一个"共享盘"，可随意命名。请注意一定要在<span style="color: red">共享云端硬盘</span>中创建
+            <img class="tutorial_img" src="../image/gd-10.jpg" />
+            创建完成后，会自动进入刚刚创建的"共享盘"，如果浏览器没有自动跳转，可双击进入。
+        </li>
+        <li>
+            在共享盘中，右键新建一个文件夹，命名为<code>upload</code>
+            <img class="tutorial_img" src="../image/gd-11.jpg" />
+        </li>
+        <li>
+            创建并进入upload文件夹，复制地址栏参数folders/ 后面的那一串代码，注意不要把"/"也复制进去了
+            <img class="tutorial_img" src="../image/gd-12.jpg" />
+            比如我这边需要复制的就是<code>17phBQbZmNCjyYeAbYh284A0_nyt57ayB</code>，大家根据自己地址栏的值修改即可。
+            </br>
+            记下这一串代码，即为下文要用到的<code>Root folder</code>
+        </li>
+        <li>
+            回到本系统，点击左侧菜单栏中的"存储策略管理"，输入以下信息
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>策略名</td>
+                    <td>唯一命名，用于识别不同策略，建议 GD-example.com（更换为你的登录邮箱）</td>
+                </tr>
+                <tr>
+                    <td>类别</td>
+                    <td>googleDrive</td>
+                </tr>
+                <tr>
+                    <td>账号</td>
+                    <td>留空</td>
+                </tr>
+                <tr>
+                    <td>Root folder</td>
+                    <td>上一步记下的值</td>
+                </tr>
+                <tr>
+                    <td>是否激活</td>
+                    <td>是</td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            正常情况下，能在列表中看到你新增的这个策略。找到对应策略，点击下图红色按钮
+            <img class="tutorial_img" src="../image/authorize.jpg"/>
+        </li>
+        <li>
+            点击后会自动跳转到Google授权页，同意授权即可完成对接。
+        </li>
+    </ol>
+</div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GD对接教程</title>
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <ol>
+        <li>私聊管理员获得一个Google drive 团队账号，也可自己购买全局管理</li>
+        <li style="color: red">浏览器打开一个无痕浏览（保证当前Session没有登录过其他Google账号！）</li>
+        <li>
+            前往
+            <a href="https://console.cloud.google.com/" target="_blank">
+                Google cloud console
+            </a>
+            登录账号
+        </li>
+        <li>
+            登录后点击此处注册项目
+            <img class="tutorial_img" src="../image/gd-1.jpg"/>
+        </li>
+        <li>
+            在新出现的表单中直接点击"创建"按钮
+        </li>
+        <li>
+            点击左侧导航栏中的"API和服务"，找到并点击"OAuth 同意屏幕"
+            <img class="tutorial_img" src="../image/gd-2.jpg"/>
+        </li>
+        <li>
+            在新窗口中，<code>User Type</code>选择 "内部"，点击创建
+        </li>
+        <li>
+            在新出现的表单中，如下填写信息
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>应用名称</td>
+                    <td>建议 GD-example.com（更换为当前Google账号）</td>
+                </tr>
+                <tr>
+                    <td>用户支持电子邮件</td>
+                    <td>选择当前帐号</td>
+                </tr>
+                <tr>
+                    <td>开发者联系信息</td>
+                    <td>输入当前账号</td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            接下来一直同意后，点击完成会跳回到"OAuth 同意屏幕"页面，看到如下界面即为成功！
+            <img class="tutorial_img" src="../image/gd-3.jpg"/>
+        </li>
+        <li>
+            点击左侧 "凭据" 选项，选择"Oauth客户端ID"
+            <img class="tutorial_img" src="../image/gd-4.jpg"/>
+            在新出现的表单中，如下填写信息，填写完毕后，点击左下角"创建"按钮。
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>应用类型</td>
+                    <td>Web应用</td>
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td>随意填写，默认名称也可</td>
+                <tr>
+                    <td>已获授权的 JavaScript 来源</td>
+                    <td>留空</td>
+                </tr>
+                <tr>
+                    <td>已获授权的重定向 URI</td>
+                    <td>https://developers.google.com/oauthplayground</td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            创建完成后，可以看到如下界面，复制<code>Client ID</code> 与 <code>Secret key</code>
+            <img class="tutorial_img" src="../image/gd-5.jpg"/>
+        </li>
+        <li>
+            前往<a href="https://developers.google.com/oauthplayground/" target="_blank">谷歌开发者Console</a>
+        </li>
+        <li>
+            如图点击右上角按钮，把"Use your own OAuth credentials"勾选，然后输入上一步记下的
+            <code>Client ID</code> 与 <code>Secret key</code>
+            <img class="tutorial_img" src="../image/gd-6.jpg"/>
+            输入后，点击"Close"按钮
+        </li>
+        <li>
+            如图找到左侧对应按钮，点击"Authorize APIs"
+            <img class="tutorial_img" src="../image/gd-7.jpg"/>
+        </li>
+        <li>
+            会跳转到"选择账号"页面，选择当前使用的这个账号会看到请求授权页面
+            <img class="tutorial_img" src="../image/gd-8.png"/>
+        </li>
+        <li>
+            选择"允许"后，会自动跳回先前的界面，并看到左侧菜单栏自动跳转到了第二步。
+            <img class="tutorial_img" src="../image/gd-9.jpg" />
+            点击 "exchange authorization code for tokens"
+            获得并<code>记下 Refresh token</code>
+        </li>
+        <li>
+            前往<a href="https://drive.google.com/drive/shared-drives" _target="_blank">Google drive</a>，创建一个根目录（用于存放上传的文件）。
+            如下图，创建一个"共享盘"，可随意命名。请注意一定要在<span style="color: red">共享云端硬盘</span>中创建
+            <img class="tutorial_img" src="../image/gd-10.jpg" />
+            创建完成后，会自动进入刚刚创建的"共享盘"，如果浏览器没有自动跳转，可双击进入。
+        </li>
+        <li>
+            在共享盘中，右键新建一个文件夹，命名为<code>upload</code>
+            <img class="tutorial_img" src="../image/gd-11.jpg" />
+        </li>
+        <li>
+            创建并进入upload文件夹，复制地址栏参数folders/ 后面的那一串代码，注意不要把"/"也复制进去了
+            <img class="tutorial_img" src="../image/gd-12.jpg" />
+            比如我这边需要复制的就是<code>17phBQbZmNCjyYeAbYh284A0_nyt57ayB</code>，大家根据自己地址栏的值修改即可。
+            </br>
+            记下这一串代码，即为下文要用到的<code>Root folder</code>
+        </li>
+        <li>
+            回到本系统，点击左侧菜单栏中的"存储策略管理"，输入以下信息
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>Bucket name</td>
+                    <td>之前记下的->Client ID</td>
+                </tr>
+                <tr>
+                    <td>Access key</td>
+                    <td>之前记下的->Refresh token</td>
+                </tr>
+                <tr>
+                    <td>Secret key</td>
+                    <td>之前记下的->客户端密码</td>
+                </tr>
+                <tr>
+                    <td>Root folder</td>
+                    <td>之前记下的->路径参数</td>
+                </tr>
+                <tr>
+                    <td>是否激活</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td>失效时间</td>
+                    <td>默认，不修改</td>
+                </tr>
+
+            </table>
+            </br>最后点击立即创建
+        </li>
+    </ol>
+</div>
+</body>
+</html>

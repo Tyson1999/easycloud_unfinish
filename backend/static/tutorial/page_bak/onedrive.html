@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Onedrive对接教程</title>
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <ol>
+        <li>私聊管理员获得一个Onedrive账号，自己购买的也可使用</li>
+        <li>
+            <span style="color: red">
+                打开一个浏览器无痕窗口
+            </span>
+                前往
+            <a href="https://azure.microsoft.com/zh-cn/services/active-directory/" target="_blank">
+                Azure active directory
+            </a>
+            登录账号
+        </li>
+        <li>
+            登录后<a
+                href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps"
+                target="_blank">
+            点击此处
+        </a>
+            注册应用（上方菜单栏有个"+新注册"）
+        </li>
+        <li>
+            在新出现的表单中填写
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>应用名</td>
+                    <td>easycloud-邮箱（例如easycloud-example.com）</td>
+                </tr>
+                <tr>
+                    <td>受支持的帐户类型</td>
+                    <td>任何组织目录(任何 Azure AD 目录 - 多租户)中的帐户和个人 Microsoft 帐户(例如，Skype、Xbox)</td>
+                </tr>
+                <tr>
+                    <td>重定向 URI</td>
+                    <td>https://storage.easycloud.org/policy/management</td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            点击下方"注册"后，会自动跳转到注册好的应用详情页，找到 <code>应用程序(客户端) ID</code>，并记下稍后会用到。
+        </li>
+        <li>
+            点击左侧"证书和密码"，找到"客户端密码"，点击"+新客户端密码"
+            <img class="tutorial_img" src="../image/od-1.png"/>
+        </li>
+        <li>
+            在新窗口中：说明可随便填写，截止期限选择：24个月。
+            </br>
+            点击"添加"后，记下 <code>值</code>。注意不是"机密ID"，是"值"！
+        </li>
+        <li>
+            获取Refresh token
+            <table border="1" style="text-align: left">
+                <tr>
+                    <th>步骤顺序</th>
+                    <th>具体说明</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><a href="https://dl.pstmn.io/download/latest/win64" target="_blank">下载并安装Postman客户端</a>，
+                        如果电脑上已有，则可跳过这一步
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        打开Postman客户端，能看到如下页面。 跳过注册账号，直接使用即可
+                        </br>
+                        <img style="height: 250px" src="../image/od-2.jpg" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        打开<a href="https://heymind.github.io/tools/microsoft-graph-api-auth" target="_blank">这个链接</a>
+                        </br>
+                        在 4. Authorize for code 这个区域内，将<code>把之前记录的 应用程序(客户端) ID 填入 ClientID的框内</code>
+                        </br>
+                        <img style="width: 45%" src="../image/od-3.jpg" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>点击下方按钮<code>AUTHORIZE</code></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        登陆账号后，会跳转回上一步的页面
+                        </br>
+                        在 5. Exchange Access Token 的 <code>code</code>行可以看到一串字符串，复制这串字符串
+                        <img style="width: 45%" src="../image/od-4.jpg" />
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            回到本系统，点击左侧菜单栏中的"存储策略管理"，输入以下信息
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>策略名</td>
+                    <td>唯一命名，用于识别不同策略，建议 OD-example.com（更换为你的Onedrive邮箱）</td>
+                </tr>
+                <tr>
+                    <td>类别</td>
+                    <td>Onedrive</td>
+                </tr>
+                <tr>
+                    <td>Bucket name</td>
+                    <td>之前记下的->Client ID</td>
+                </tr>
+                <tr>
+                    <td>Access key</td>
+                    <td>之前记下的->Refresh token</td>
+                </tr>
+                <tr>
+                    <td>Secret key</td>
+                    <td>之前记下的->客户端密码</td>
+                </tr>
+                <tr>
+                    <td>是否激活</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td>失效时间</td>
+                    <td>约24个月</td>
+                </tr>
+
+            </table>
+            </br>最后点击立即创建
+        </li>
+    </ol>
+</div>
+</body>
+</html>

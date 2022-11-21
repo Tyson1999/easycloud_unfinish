@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度网盘对接教程</title>
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+    <ol>
+        <li>
+            前往
+            <a href="https://pan.baidu.com/union/main/application/personal" target="_blank">
+                百度开发者平台
+            </a>
+            申请接入权限，一般会直接通过无需审核
+        </li>
+        <li>
+            登录后
+            <a
+                    href="https://pan.baidu.com/union/console/applist?from=person"
+                    target="_blank">
+                点击此处
+            </a>
+            右上角创建应用
+        </li>
+        <li>
+            在新出现的表单中填写
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>应用类别</td>
+                    <td>软件</td>
+                </tr>
+                <tr>
+                    <td>应用名</td>
+                    <td>easycloud_UPLOADER</td>
+                </tr>
+                <tr>
+                    <td>应用描述</td>
+                    <td>留空即可</td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            点击下方创建后，会自动跳转到详情页
+        </li>
+        <li>
+            记下如下两个重要参数（AppKey & SecretKey）
+            <img class="tutorial_img" src="../image/baiduPan-1.png"/>
+        </li>
+        <li>
+            前往：
+            </br>
+            https://openapi.baidu.com/oauth/2.0/authorize?response_type=code&client_id=<code>你的AppKey</code>&redirect_uri=oob&scope=basic,netdisk&display=tv&qrcode=1&force_login=0
+            </br>
+            获取Oauth2.0授权码
+            </br>
+            <span style="color: red">请复制上述网址内的参数后，替换参数并黏贴到浏览器新窗打开！</span>
+        </li>
+        <li>
+            前往：
+            </br>
+            https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code=<code>第6步获得的授权码</code>&client_id=<code>你的AppKey</code>&client_secret=<code>你的SecretKey</code>&redirect_uri=oob
+            </br>
+            获取Refresh token。
+            </br>
+            <span style="color: red">请复制上述网址内的参数后，替换参数并黏贴到浏览器新窗打开！</span>
+        </li>
+        <li>
+            以上步骤正确的话，会出现如图结果
+            <img class="tutorial_img" src="../image/baiduPan-2.png"/>
+            记下<code>refresh_token</code>，注意不是access_token！
+        </li>
+        <li>
+            回到本系统，点击左侧菜单栏中的"存储策略管理"，输入以下信息
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>策略名</td>
+                    <td>唯一命名，用于识别不同策略，建议 baidu-example（更换为你的百度账号）</td>
+                </tr>
+                <tr>
+                    <td>类别</td>
+                    <td>baiduPan</td>
+                </tr>
+                <tr>
+                    <td>Bucket name</td>
+                    <td>之前记下的->AppKey</td>
+                </tr>
+                <tr>
+                    <td>Access key</td>
+                    <td>之前记下的->Refresh token</td>
+                </tr>
+                <tr>
+                    <td>Secret key</td>
+                    <td>之前记下的->SecretKey</td>
+                </tr>
+                <tr>
+                    <td>是否激活</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td>失效时间</td>
+                    <td>默认</td>
+                </tr>
+
+            </table>
+            </br>
+            最后点击立即创建
+        </li>
+    </ol>
+</head>
+<body>
+
+</body>
+</html>

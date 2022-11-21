@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度网盘对接教程</title>
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <ol>
+        <li>自备一个百度网盘账号</li>
+        <li>
+            <span style="color: red">
+                打开一个浏览器无痕窗口
+            </span>
+            前往
+            <a href="http://pan.baidu.com/" target="_blank">
+                百度网盘登陆页
+            </a>
+            登录账号
+        </li>
+        <li>
+            回到本系统，点击左侧菜单栏中的"存储策略管理"，输入以下信息
+            <table border="1">
+                <tr>
+                    <th>表单项</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>策略名</td>
+                    <td>唯一命名，用于识别不同策略，建议 baidu-example（更换为你的百度用户名）</td>
+                </tr>
+                <tr>
+                    <td>类别</td>
+                    <td>baiduPan</td>
+                </tr>
+                <tr>
+                    <td>账号</td>
+                    <td>留空</td>
+                </tr>
+                <tr>
+                    <td>Root folder</td>
+                    <td>/</td>
+                </tr>
+                <tr>
+                    <td>是否激活</td>
+                    <td>是</td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            点击立即创建
+        </li>
+        <li>
+            正常情况下，能在列表中看到你新增的这个策略。找到对应策略，点击下图红色按钮
+            <img class="tutorial_img" src="../image/authorize.jpg"/>
+        </li>
+        <li>
+            点击后会自动跳转到Onedrive授权页，同意授权即可完成对接。
+        </li>
+    </ol>
+</div>
+</body>
+</html>
